@@ -1,0 +1,19 @@
+﻿@page "/counter"
+@page "/test/counter"
+
+<h1>Book a table</h1>
+
+<p>Number of guests: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Person count</button>
+
+<button class="btn btn-info">Confirm</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}

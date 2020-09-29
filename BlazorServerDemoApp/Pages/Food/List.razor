@@ -1,0 +1,71 @@
+﻿@page "/Food/List"
+
+@inject IFoodData foodData
+
+<h3>List</h3>
+
+@if (foodList is null)
+{
+    <h4>Records Loading...</h4>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var food in foodList)
+            {
+                <tr>
+                    <td>@food.Title</td>
+                    <td>@food.Description</td>
+                    <td>@string.Format("{0:C}", food.Price)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<br />
+
+
+<div class="card-columns">
+    <div class="card m-2" style="width: auto;">
+        <img src="/image/burger.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Burger meals</h5>
+            <p class="card-text">Tasty burgers with various menu options, with classic fries or sweet potatoe and fresh salad.</p>
+        </div>
+    </div>
+    <div class="card m-2" style="width: auto;">
+        <img src="/image/mexican.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Mexican meals</h5>
+            <p class="card-text">Taste our authentic mexican burritos or quesadillas with the stuffing of your own taste and choose the menu you like.</p>
+        </div>
+    </div>
+    <div class="card m-2" style="width: auto;">
+        <img src="/image/vegan.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Vegal meals</h5>
+            <p class="card-text">Exciting vegan dishes, roasted veggies with various side dishes, veggie soups and stews.</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+@code {
+    private List<FoodModel> foodList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        foodList = await foodData.GetFood();
+    }
+}
